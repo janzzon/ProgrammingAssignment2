@@ -49,4 +49,32 @@ b$getinverse()
 cacheSolve(b)
 round(b$get() %*% b$getinverse())
 
+<<<<<<< HEAD
 testthat::expect_equal((b$get() %*% b$getinverse()),diag(d))
+=======
+testthat::expect_equal((b$get() %*% b$getinverse()),diag(d))
+
+
+
+
+
+
+
+### old ####
+# 
+# 
+# d <- 5
+# nummer <- rnorm(d^2, mean = d, sd = d)
+# mtrx <- matrix (nummer, ncol= d)
+# 
+# round((solve (mtrx) %*% mtrx ))
+# 
+# diag(d)
+# testthat::expect_equal((solve (mtrx) %*% mtrx),diag(d))
+# 
+# diag(d) %*% diag(d)
+# 
+# pryr::object_size(mtrx)
+# pryr::mem_used()
+# 
+>>>>>>> f5451a5f40e3889bf1cc6ced0429e388b3590869
