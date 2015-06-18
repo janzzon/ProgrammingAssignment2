@@ -39,42 +39,25 @@ testthat::expect_equal(a$getmean(),mean(vectorvalues))
 b <- makeCacheMatrix()
 
 d <- 25
-number <- rnorm(d^2, mean = d, sd = d)
-mtrx <- matrix (number, ncol= d)
+mtrx <- matrix (rnorm(d^2, mean = d, sd = d), ncol= d)
 
 b$set (mtrx)
 head(b$get())
+
+# Test that funtion get return stored content
+testthat::expect_equal(b$get(),mtrx)  
+
 b$getinverse()
+# Test that a$getmean() returns NULL before functions cachemean() is run
+testthat::expect_null(b$getinverse())
 
-cacheSolve(b)
-round(b$get() %*% b$getinverse())
+# Run function cacheSolve() to calculate matrix inverse of object from makeCacheMatrix() if not already calculated
+head(cacheSolve(b))
 
-<<<<<<< HEAD
+# Test that cachemean(a) returns message "getting cached data" when run more than once
+testthat::expect_message(cacheSolve(b),"getting cached data")
+
+# Test that output from cacheSolve() is correct by verify that b$get() %*% b$getinverse() is a identity matrix
+# See http://www.mathsisfun.com/algebra/matrix-inverse.html for short peek of identity matrix
+
 testthat::expect_equal((b$get() %*% b$getinverse()),diag(d))
-=======
-testthat::expect_equal((b$get() %*% b$getinverse()),diag(d))
-
-
-
-
-
-
-
-### old ####
-# 
-# 
-# d <- 5
-# nummer <- rnorm(d^2, mean = d, sd = d)
-# mtrx <- matrix (nummer, ncol= d)
-# 
-# round((solve (mtrx) %*% mtrx ))
-# 
-# diag(d)
-# testthat::expect_equal((solve (mtrx) %*% mtrx),diag(d))
-# 
-# diag(d) %*% diag(d)
-# 
-# pryr::object_size(mtrx)
-# pryr::mem_used()
-# 
->>>>>>> f5451a5f40e3889bf1cc6ced0429e388b3590869
