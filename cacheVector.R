@@ -29,10 +29,3 @@ cachemean <- function(x, ...) {
   x$setmean(m)
   m
 }
-
-a <- makeVector()
-a$set (5:7)
-a$get()
-a$getmean()
-a$setmean(mean(a$get()))
-a$getmean()
